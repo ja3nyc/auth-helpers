@@ -46,5 +46,8 @@
 		"**/*.{ts,tsx,md}": [
 			"prettier --check"
 		]
+	},
+	"dependencies": {
+		"vitest": "^0.34.6"
 	}
 }

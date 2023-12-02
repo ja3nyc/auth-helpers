@@ -9,13 +9,15 @@ function createChunkRegExp(chunkSize: number) {
 
 const MAX_CHUNK_SIZE = 3180;
 const MAX_CHUNK_REGEXP = createChunkRegExp(MAX_CHUNK_SIZE);
-
+const byteSize = (str: string) => new Blob([str]).size;
 /**
  * create chunks from a string and return an array of object
  */
 export function createChunks(key: string, value: string, chunkSize?: number): Chunk[] {
 	const re = chunkSize !== undefined ? createChunkRegExp(chunkSize) : MAX_CHUNK_REGEXP;
 
+	// get byte size of string
+	const cookieBytes = byteSize(value);
 	// check the length of the string to work out if it should be returned or chunked
 	const chunkCount = Math.ceil(value.length / (chunkSize ?? MAX_CHUNK_SIZE));
 
